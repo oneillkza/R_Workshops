@@ -375,8 +375,7 @@ biocLite('flowCore') #Or whatever the package is called.
 
 ## Edgar Anderson's Iris Data Set
 
-* Provides the measurements in centimeters of the variables sepal length and width and petal length and width, respectively, for 50 flowers from each of 3 species of iris.
-* The species are *Iris setosa*, *versicolor*, and *virginica*.
+Provides the measurements in centimeters of the variables sepal length and width and petal length and width, respectively, for 50 flowers from each of 3 species of iris.
 
 ![*Iris versicolor*](images/iris_versicolor.jpg)
 
