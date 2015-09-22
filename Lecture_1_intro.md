@@ -12,8 +12,17 @@ fig_caption: no
 toc: yes
 toc_depth: 2
 ---
-	
-# What is R, and Why Should I Use It?
+
+# Introduction
+
+## Course Logistics
+
+* This is a very brief introduction to a very large topic.
+* There will be at least one follow-up workshop going into more depth.
+* Depending on demand (and our time), we may create more.
+* You can find all of the slides at [https://github.com/oneillkza/R_Workshops](https://github.com/oneillkza/R_Workshops)
+* In the last slide are links to materials from some excellent and much longer courses.
+* Please ask questions as we go!
 	
 ## What is R?
 
@@ -364,19 +373,117 @@ biocLite('flowCore') #Or whatever the package is called.
 
 # Loading in Files
 
-## The Iris Data Set
+## Edgar Anderson's Iris Data Set
+
+* Provides the measurements in centimeters of the variables sepal length and width and petal length and width, respectively, for 50 flowers from each of 3 species of iris.
+* The species are *Iris setosa*, *versicolor*, and *virginica*.
+
+![*Iris versicolor*](images/iris_versicolor.jpg)
+
+## Edgar Anderson's Iris Data Set
+
+Let's load the Iris data set.
+
+
+```r
+data(iris)
+iris_dat <- iris
+```
+
+`str()` the object as a sanity check.
+
+
+```r
+str(iris_dat, max.level=0)
+```
+
+```
+## 'data.frame':	150 obs. of  5 variables:
+```
+
+## Creating directories and downloading data
+In many situations, we have to download our data to a place we can use. We can use `dir.create()` to create a `data` directory in our project directory. 
+
+
+```r
+dir.create("data")
+```
+
+Next, we can download the data for this exercise. 
+
+
+```r
+download.file("http://ateucher.github.io/rcourse_site/data/iris.csv", 
+              destfile = "data/iris.csv")
+```
 
 ## Loading in CSV
 
-## Loading in from Excel ?
+The simplest way to input and output data is in the form of comma separated files. Comma separated files, which have the suffix **.csv**, are recognised by almost all statistical and spreadsheet programs including R and Excel.
+
+To load comma separated files in R:
 
 
+```r
+iris_dat <- read.csv('data/iris.csv')
+```
+
+## Loading in from Excel
+
+Unfortunately, there is no base package support for importing data directly from MS Excel. You could save it in another format, THEN import this new file.
+
+Alternatively, you could use the `gdata` package. 
+
+
+```r
+# install gdata and load as dependency
+install.packages('gdata')
+library(gdata)
+
+# load data
+iris_dat <- read.xls('data/iris.xls')
+```
 
 # Basic Statistical Tests
 
-## Student's T Test
+## Student's t-test
+Using the Iris data set, let's find out if the difference in sepal length between two species is significant.
+
+`subset()` data frame into *Iris versicolor* and *virginica*.
+
+
+```r
+versicolor <- subset(iris_dat, iris_dat$Species == 'versicolor')
+virginica <- subset(iris_dat, iris_dat$Species == 'virginica')
+```
+
+We can use `t.test()` to answer our question.
+
+
+```r
+t.test(versicolor$Sepal.Length, virginica$Sepal.Length)
+```
 
 ## Examining the Results
+
+
+```r
+t.test(versicolor$Sepal.Length, virginica$Sepal.Length)
+```
+
+```
+## 
+## 	Welch Two Sample t-test
+## 
+## data:  versicolor$Sepal.Length and virginica$Sepal.Length
+## t = -5.6292, df = 94.025, p-value = 1.866e-07
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -0.8819731 -0.4220269
+## sample estimates:
+## mean of x mean of y 
+##     5.936     6.588
+```
 
 # Basic Plots
 
@@ -389,7 +496,7 @@ iris_dat <- iris
 plot(Sepal.Length~Sepal.Width, data=iris_dat)
 ```
 
-![plot of chunk unnamed-chunk-22](figure/unnamed-chunk-22-1.png) 
+![plot of chunk unnamed-chunk-31](figure/unnamed-chunk-31-1.png) 
 
 ## Scatter Plot, Alternate Way of Calling
 
@@ -398,7 +505,7 @@ plot(Sepal.Length~Sepal.Width, data=iris_dat)
 plot(iris_dat$Sepal.Width, iris_dat$Sepal.Length)
 ```
 
-![plot of chunk unnamed-chunk-23](figure/unnamed-chunk-23-1.png) 
+![plot of chunk unnamed-chunk-32](figure/unnamed-chunk-32-1.png) 
 
 ## Scatter Plot, With Some Options
 
@@ -414,7 +521,7 @@ plot(iris_dat$Sepal.Width, iris_dat$Sepal.Length,
 
 ## Scatter Plot, With Some Options
 
-![plot of chunk unnamed-chunk-25](figure/unnamed-chunk-25-1.png) 
+![plot of chunk unnamed-chunk-34](figure/unnamed-chunk-34-1.png) 
 
 ## Dynamite Plots
 
@@ -430,7 +537,7 @@ plot(iris_dat$Sepal.Width, iris_dat$Sepal.Length,
 boxplot(Sepal.Width~Species, data=iris_dat)
 ```
 
-![plot of chunk unnamed-chunk-26](figure/unnamed-chunk-26-1.png) 
+![plot of chunk unnamed-chunk-35](figure/unnamed-chunk-35-1.png) 
 
 
 ## Beeswarm Plots
@@ -440,7 +547,7 @@ library(beeswarm)
 beeswarm(Sepal.Width~Species, data=iris_dat)
 ```
 
-![plot of chunk unnamed-chunk-27](figure/unnamed-chunk-27-1.png) 
+![plot of chunk unnamed-chunk-36](figure/unnamed-chunk-36-1.png) 
 
 ## Beeswarm Plots With More Options
 
@@ -452,7 +559,7 @@ beeswarm(jitter(Sepal.Width)~Species, data=iris_dat,
 ```
 
 ## Beeswarm Plots With More Options
-![plot of chunk unnamed-chunk-29](figure/unnamed-chunk-29-1.png) 
+![plot of chunk unnamed-chunk-38](figure/unnamed-chunk-38-1.png) 
 
 ## Beeswarm and Boxplots Combined
 
@@ -466,14 +573,14 @@ beeswarm(jitter(Sepal.Width)~Species, data=iris_dat,
 ```
 
 ## Beeswarm and Boxplots Combined
-![plot of chunk unnamed-chunk-31](figure/unnamed-chunk-31-1.png) 
+![plot of chunk unnamed-chunk-40](figure/unnamed-chunk-40-1.png) 
 
 
 ## Other Plotting Packages
 
 # Credits
 
-## This Workshop Brought to You By 
+## This Workshop Brought to You By...
 
 
 ### Course Developers:
@@ -489,3 +596,7 @@ Much material was reused from [Software Carpentry's Bootcamp workshops](https://
 ### Pizza and Logistics:
 
 - GraSPoDS (especially Eva Yap and Jessica Pilsworth)
+
+### License:
+
+You are free to download, copy and modify this work in accordance with the Creative Commons Attribution License](http://creativecommons.org/licenses/by/3.0/).
