@@ -12,8 +12,17 @@ fig_caption: no
 toc: yes
 toc_depth: 2
 ---
-	
-# What is R, and Why Should I Use It?
+
+# Introduction
+
+## Course Logistics
+
+* This is a very brief introduction to a very large topic.
+* There will be at least one follow-up workshop going into more depth.
+* Depending on demand (and our time), we may create more.
+* You can find all of the slides at [https://github.com/oneillkza/R_Workshops](https://github.com/oneillkza/R_Workshops)
+* In the last slide are links to materials from some excellent and much longer courses.
+* Please ask questions as we go!
 	
 ## What is R?
 
