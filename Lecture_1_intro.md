@@ -48,14 +48,13 @@ R is a versatile, open source programming language that was specifically designe
 	* Huge range of statistical tests, biological data types, etc.
 	* Plotting in R is far more sophisticated than any available GUI.
 
-## Proof of What I Mean By Pretty Pictures:
+## What I Mean By Pretty Pictures (Also Reproducibility)
 
 ![[Gerstung et al (2015) Nature Communications (CC-BY)](http://www.nature.com/ncomms/2015/150109/ncomms6901/full/ncomms6901.html#supplementary-information) ](images/ncomms6901-f1.jpg)
 
 
 
 # RStudio
-
 ## Set up a new project
 
 - Click 'File', then 'New project'
@@ -72,7 +71,7 @@ Note: for Mac users, where I say 'ctrl', use your weird Mac command key instead.
 
 ## Working between the script and console 
 
-*Type the following into the console, and press enter:
+Type the following into the console, and press enter:
 
 
 ```r
@@ -83,9 +82,61 @@ print("Hello")
 ## [1] "Hello"
 ```
 
-* Now type it into the file window, and with the cursor on that line, press ctrl+enter
+* Now type it into the file pane, and with the cursor on that line, press ctrl+enter
 * Messing around in the console is fun.
 * But it's better to keep your work in a file which you save often.
+
+## Getting Help
+
+This will bring up a help page in the plot/help/file pane:
+
+```r
+help('print')
+```
+
+This also works:
+
+```r
+?print
+```
+
+
+# Installing Add-on Packages
+
+## CRAN
+
+* Most of R's power comes from free third-party add-ons
+* CRAN is the Comprehensive R Archive Network
+* It is the main repository for R packages
+* You can install packages like so:
+
+
+```r
+install.packages('beeswarm')
+```
+
+When you start a new session, you can then load a package using `library`:
+
+```r
+library('beeswarm')
+```
+
+## Bioconductor
+
+* Bioconductor is a big part of what makes R awesome for biologists.
+* Bioconductor is a repository specifically for (molecular) biology R packages.
+* It has very stringent rules for those packages regarding documentation, examples and code quality.
+* There are packages to handle a vast range of data, from BAM files to microarrays to flow cytometry and many more.
+
+[Check it out at www.bioconductor.org](https://www.bioconductor.org/)
+
+To install Bioconductor packages (note: don't run this now, it can take ten minutes or more the first time):
+
+
+```r
+source("http://bioconductor.org/biocLite.R")
+biocLite('flowCore') #Or whatever the package is called.
+```
 
 
 
@@ -114,7 +165,7 @@ some_other_number
 ## [1] 125
 ```
 
-Take a look in your environment window in RStudio. You can also see what objects are defined using the `ls()` command:
+Take a look in your environment pane in RStudio. You can also see what objects are defined using the `ls()` command:
 
 
 ```r
@@ -260,7 +311,7 @@ head(esoph)
 ## 6 25-34     40-79    10-19      0         7
 ```
 
-Also try clicking on `esoph` in the Environment window in RStudio.
+Also try clicking on `esoph` in the Environment pane in RStudio.
 
 ## Working With Data Frames:
 
@@ -268,7 +319,7 @@ You can access columns in a data frame using `$`, or rows, columns, or individua
 
 
 ```r
-head(esoph$agegp)     # column
+head( esoph$agegp )     # column
 ```
 
 ```
@@ -277,7 +328,7 @@ head(esoph$agegp)     # column
 ```
 
 ```r
-head(esoph[,'agegp']) # column using []
+head( esoph[,'agegp'] ) # column using []
 ```
 
 ```
@@ -331,46 +382,6 @@ summary(esoph[,3:5])
 ##                3rd Qu.: 4.000   3rd Qu.:14.00  
 ##                Max.   :17.000   Max.   :60.00
 ```
-
-
-
-# Installing Add-on Packages
-
-## CRAN
-
-* Most of R's power comes from free third-party add-ons
-* CRAN is the Comprehensive R Archive Network
-* It is the main repository for R packages
-* You can install packages like so:
-
-
-```r
-install.packages('beeswarm')
-```
-
-When you start a new session, you can then load a package using `library`:
-
-```r
-library('beeswarm')
-```
-
-## Bioconductor
-
-* Bioconductor is a big part of what makes R awesome for biologists.
-* Bioconductor is a repository specifically for (molecular) biology R packages.
-* It has very stringent rules for those packages regarding documentation, examples and code quality.
-* There are packages to handle a vast range of data, from BAM files to microarrays to flow cytometry and many more.
-
-[Check it out at www.bioconductor.org](https://www.bioconductor.org/)
-
-To install Bioconductor packages (note: don't run this now, it can take ten minutes or more the first time):
-
-
-```r
-source("http://bioconductor.org/biocLite.R")
-biocLite('flowCore') #Or whatever the package is called.
-```
-
 
 
 # Loading in Files
@@ -528,12 +539,10 @@ paste("p-value:", iris_test$p.value)
 
 
 ```r
-data(iris)
-iris_dat <- iris
 plot(Sepal.Length~Sepal.Width, data=iris_dat)
 ```
 
-![plot of chunk unnamed-chunk-33](figure/unnamed-chunk-33-1.png) 
+![plot of chunk unnamed-chunk-35](figure/unnamed-chunk-35-1.png) 
 
 ## Scatter Plot, Alternate Way of Calling
 
@@ -542,7 +551,7 @@ plot(Sepal.Length~Sepal.Width, data=iris_dat)
 plot(iris_dat$Sepal.Width, iris_dat$Sepal.Length)
 ```
 
-![plot of chunk unnamed-chunk-34](figure/unnamed-chunk-34-1.png) 
+![plot of chunk unnamed-chunk-36](figure/unnamed-chunk-36-1.png) 
 
 ## Scatter Plot, With Some Options
 
@@ -558,7 +567,7 @@ plot(iris_dat$Sepal.Width, iris_dat$Sepal.Length,
 
 ## Scatter Plot, With Some Options
 
-![plot of chunk unnamed-chunk-36](figure/unnamed-chunk-36-1.png) 
+![plot of chunk unnamed-chunk-38](figure/unnamed-chunk-38-1.png) 
 
 ## Dynamite Plots
 
@@ -574,7 +583,7 @@ plot(iris_dat$Sepal.Width, iris_dat$Sepal.Length,
 boxplot(Sepal.Width~Species, data=iris_dat)
 ```
 
-![plot of chunk unnamed-chunk-37](figure/unnamed-chunk-37-1.png) 
+![plot of chunk unnamed-chunk-39](figure/unnamed-chunk-39-1.png) 
 
 
 ## Beeswarm Plots
@@ -584,7 +593,7 @@ library(beeswarm)
 beeswarm(Sepal.Width~Species, data=iris_dat)
 ```
 
-![plot of chunk unnamed-chunk-38](figure/unnamed-chunk-38-1.png) 
+![plot of chunk unnamed-chunk-40](figure/unnamed-chunk-40-1.png) 
 
 ## Beeswarm Plots With More Options
 
@@ -596,7 +605,7 @@ beeswarm(jitter(Sepal.Width)~Species, data=iris_dat,
 ```
 
 ## Beeswarm Plots With More Options
-![plot of chunk unnamed-chunk-40](figure/unnamed-chunk-40-1.png) 
+![plot of chunk unnamed-chunk-42](figure/unnamed-chunk-42-1.png) 
 
 ## Beeswarm and Boxplots Combined
 
@@ -610,7 +619,7 @@ beeswarm(jitter(Sepal.Width)~Species, data=iris_dat,
 ```
 
 ## Beeswarm and Boxplots Combined
-![plot of chunk unnamed-chunk-42](figure/unnamed-chunk-42-1.png) 
+![plot of chunk unnamed-chunk-44](figure/unnamed-chunk-44-1.png) 
 
 
 ## Other Plotting Packages - `ggplot2`
@@ -635,7 +644,7 @@ ggplot(iris_dat, aes(Sepal.Length, Sepal.Width)) +
 
 
 
-![plot of chunk unnamed-chunk-45](figure/unnamed-chunk-45-1.png) 
+![plot of chunk unnamed-chunk-47](figure/unnamed-chunk-47-1.png) 
 
 # Credits
 

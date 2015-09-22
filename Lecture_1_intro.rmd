@@ -48,14 +48,13 @@ R is a versatile, open source programming language that was specifically designe
 	* Huge range of statistical tests, biological data types, etc.
 	* Plotting in R is far more sophisticated than any available GUI.
 
-## Proof of What I Mean By Pretty Pictures:
+## What I Mean By Pretty Pictures (Also Reproducibility)
 
 ![[Gerstung et al (2015) Nature Communications (CC-BY)](http://www.nature.com/ncomms/2015/150109/ncomms6901/full/ncomms6901.html#supplementary-information) ](images/ncomms6901-f1.jpg)
 
 
 
 # RStudio
-
 ## Set up a new project
 
 - Click 'File', then 'New project'
@@ -72,15 +71,62 @@ Note: for Mac users, where I say 'ctrl', use your weird Mac command key instead.
 
 ## Working between the script and console 
 
-*Type the following into the console, and press enter:
+Type the following into the console, and press enter:
 
 ```{r}
 print("Hello")
 ```
 
-* Now type it into the file window, and with the cursor on that line, press ctrl+enter
+* Now type it into the file pane, and with the cursor on that line, press ctrl+enter
 * Messing around in the console is fun.
 * But it's better to keep your work in a file which you save often.
+
+## Getting Help
+
+This will bring up a help page in the plot/help/file pane:
+```{r, eval=FALSE}
+help('print')
+```
+
+This also works:
+```{r, eval=FALSE}
+?print
+```
+
+
+# Installing Add-on Packages
+
+## CRAN
+
+* Most of R's power comes from free third-party add-ons
+* CRAN is the Comprehensive R Archive Network
+* It is the main repository for R packages
+* You can install packages like so:
+
+```{r, eval=FALSE}
+install.packages('beeswarm')
+```
+
+When you start a new session, you can then load a package using `library`:
+```{r, eval=FALSE}
+library('beeswarm')
+```
+
+## Bioconductor
+
+* Bioconductor is a big part of what makes R awesome for biologists.
+* Bioconductor is a repository specifically for (molecular) biology R packages.
+* It has very stringent rules for those packages regarding documentation, examples and code quality.
+* There are packages to handle a vast range of data, from BAM files to microarrays to flow cytometry and many more.
+
+[Check it out at www.bioconductor.org](https://www.bioconductor.org/)
+
+To install Bioconductor packages (note: don't run this now, it can take ten minutes or more the first time):
+
+```{r eval=FALSE}
+source("http://bioconductor.org/biocLite.R")
+biocLite('flowCore') #Or whatever the package is called.
+```
 
 
 
@@ -97,7 +143,7 @@ some_other_number <- some_number ^ 3
 some_other_number
 ```
 
-Take a look in your environment window in RStudio. You can also see what objects are defined using the `ls()` command:
+Take a look in your environment pane in RStudio. You can also see what objects are defined using the `ls()` command:
 
 ```{r}
 ls()
@@ -179,15 +225,15 @@ data(esoph)
 head(esoph)
 ```
 
-Also try clicking on `esoph` in the Environment window in RStudio.
+Also try clicking on `esoph` in the Environment pane in RStudio.
 
 ## Working With Data Frames:
 
 You can access columns in a data frame using `$`, or rows, columns, or individual values using `[]`
 
 ```{r}
-head(esoph$agegp)     # column
-head(esoph[,'agegp']) # column using []
+head( esoph$agegp )     # column
+head( esoph[,'agegp'] ) # column using []
 ```
 
 ## Working With Data Frames (ctd):
@@ -203,43 +249,6 @@ esoph[2,1]            # Single value using numbers
 ```{r}
 summary(esoph[,3:5])
 ```
-
-
-
-# Installing Add-on Packages
-
-## CRAN
-
-* Most of R's power comes from free third-party add-ons
-* CRAN is the Comprehensive R Archive Network
-* It is the main repository for R packages
-* You can install packages like so:
-
-```{r, eval=FALSE}
-install.packages('beeswarm')
-```
-
-When you start a new session, you can then load a package using `library`:
-```{r, eval=FALSE}
-library('beeswarm')
-```
-
-## Bioconductor
-
-* Bioconductor is a big part of what makes R awesome for biologists.
-* Bioconductor is a repository specifically for (molecular) biology R packages.
-* It has very stringent rules for those packages regarding documentation, examples and code quality.
-* There are packages to handle a vast range of data, from BAM files to microarrays to flow cytometry and many more.
-
-[Check it out at www.bioconductor.org](https://www.bioconductor.org/)
-
-To install Bioconductor packages (note: don't run this now, it can take ten minutes or more the first time):
-
-```{r eval=FALSE}
-source("http://bioconductor.org/biocLite.R")
-biocLite('flowCore') #Or whatever the package is called.
-```
-
 
 
 # Loading in Files
@@ -351,8 +360,6 @@ paste("p-value:", iris_test$p.value)
 ## Scatter Plot
 
 ```{r}
-data(iris)
-iris_dat <- iris
 plot(Sepal.Length~Sepal.Width, data=iris_dat)
 ```
 
