@@ -15,7 +15,7 @@ toc_depth: 2
 	
 # What is R, and Why Should I Use It?
 	
-## The Basics
+## What is R?
 
 R is a versatile, open source programming language that was specifically designed for data analysis. As such R is extremely useful both for statistics and data science. Inspired by the programming language S.  
 
@@ -60,9 +60,9 @@ Note: for Mac users, where I say 'ctrl', use your weird Mac control key instead.
 
 ## Quick overview of RStudio
 
--Figure of interface
+![RStudio Interface](images/rstudio_screen.png)
 
-## Working between the script and console {.fragile}
+## Working between the script and console 
 
 *Type the following into the console, and press enter:
 
@@ -80,7 +80,7 @@ print("Hello")
 * But it's better to keep your work in a file which you save often.
 
 
-# R Basics
+# R Commands and Objects
 
 ## Objects
 
@@ -152,11 +152,7 @@ some_number + 5
 
 
 ```r
-some_text + 5
-```
-
-```
-## Error in some_text + 5: non-numeric argument to binary operator
+some_text + 5   # This would give an error -- try it.
 ```
 
 
@@ -200,17 +196,171 @@ c(my_vector, my_vector^3, my_vector^4)
 ## [15]  625 1296 2401 4096
 ```
 
-## Data frames
+## Accessing Vectors
 
-Data frames are special objects in R for storing mixed data. You can think of them as something like a sheet in Excel. We're going to load in one of R's default data sets, a series
+To get to parts of a vector, you use square bracket notation: `[]`
 
 
+```r
+my_vector[3]
+```
 
-# Installing Packages
+```
+## [1] 5
+```
+
+You can use vectors to access a vector:
+
+
+```r
+my_vector[c(1,3,5)]
+```
+
+```
+## [1] 1 5 7
+```
+
+You can also use ranges:
+
+
+```r
+my_vector[2:4]
+```
+
+```
+## [1] 3 5 6
+```
+
+## Data Frames
+
+Data frames are special objects in R for storing mixed data. You can think of them as something like a sheet in Excel. We're going to load in one of R's default data sets, a series of esophogal cancer vs smoking data. We'll use the `head()` function to just view the first few rows.
+
+
+```r
+data(esoph)
+head(esoph)
+```
+
+```
+##   agegp     alcgp    tobgp ncases ncontrols
+## 1 25-34 0-39g/day 0-9g/day      0        40
+## 2 25-34 0-39g/day    10-19      0        10
+## 3 25-34 0-39g/day    20-29      0         6
+## 4 25-34 0-39g/day      30+      0         5
+## 5 25-34     40-79 0-9g/day      0        27
+## 6 25-34     40-79    10-19      0         7
+```
+
+Also try clicking on `esoph` in the Environment window in RStudio.
+
+## Working With Data Frames:
+
+You can access columns in a data frame using `$`, or rows, columns, or individual values using `[]`
+
+
+```r
+head(esoph$agegp)     # column
+```
+
+```
+## [1] 25-34 25-34 25-34 25-34 25-34 25-34
+## Levels: 25-34 < 35-44 < 45-54 < 55-64 < 65-74 < 75+
+```
+
+```r
+head(esoph[,'agegp']) # column using []
+```
+
+```
+## [1] 25-34 25-34 25-34 25-34 25-34 25-34
+## Levels: 25-34 < 35-44 < 45-54 < 55-64 < 65-74 < 75+
+```
+
+## Working With Data Frames (ctd):
+
+
+```r
+esoph[2,]             # row
+```
+
+```
+##   agegp     alcgp tobgp ncases ncontrols
+## 2 25-34 0-39g/day 10-19      0        10
+```
+
+```r
+esoph[2,'agegp']      # Single value
+```
+
+```
+## [1] 25-34
+## Levels: 25-34 < 35-44 < 45-54 < 55-64 < 65-74 < 75+
+```
+
+```r
+esoph[2,1]            # Single value using numbers
+```
+
+```
+## [1] 25-34
+## Levels: 25-34 < 35-44 < 45-54 < 55-64 < 65-74 < 75+
+```
+
+## Aother Useful Function: Summary()
+
+
+```r
+summary(esoph[,3:5])
+```
+
+```
+##       tobgp        ncases         ncontrols    
+##  0-9g/day:24   Min.   : 0.000   Min.   : 1.00  
+##  10-19   :24   1st Qu.: 0.000   1st Qu.: 3.00  
+##  20-29   :20   Median : 1.000   Median : 6.00  
+##  30+     :20   Mean   : 2.273   Mean   :11.08  
+##                3rd Qu.: 4.000   3rd Qu.:14.00  
+##                Max.   :17.000   Max.   :60.00
+```
+
+# Installing Add-on Packages
 
 ## CRAN
 
+* Most of R's power comes from free third-party add-ons
+* CRAN is the Comprehensive R Archive Network
+* It is the main repository for R packages
+* You can install packages like so:
+
+
+```r
+install.packages('beeswarm')
+```
+
+When you start a new session, you can then load a package using `library`:
+
+```r
+library('beeswarm')
+```
+
+
 ## Bioconductor
+
+* Bioconductor is a big part of what makes R awesome for biologists.
+* Bioconductor is a repository specifically for (molecular) biology R packages.
+* It has very stringent rules for those packages regarding documentation, examples and code quality.
+* There are packages to handle a vast range of data, from BAM files to microarrays to flow cytometry and many more.
+
+[Check it out at www.bioconductor.org](https://www.bioconductor.org/)
+
+To install Bioconductor packages (note: don't run this now, it can take ten minutes or more the first time):
+
+
+```r
+source("http://bioconductor.org/biocLite.R")
+biocLite('flowCore') #Or whatever the package is called.
+```
+
 
 # Loading in Files
 
@@ -224,7 +374,7 @@ Data frames are special objects in R for storing mixed data. You can think of th
 
 # Basic Statistical Tests
 
-## Fisher's T Test
+## Student's T Test
 
 ## Examining the Results
 
@@ -232,20 +382,110 @@ Data frames are special objects in R for storing mixed data. You can think of th
 
 ## Scatter Plot
 
+
+```r
+data(iris)
+iris_dat <- iris
+plot(Sepal.Length~Sepal.Width, data=iris_dat)
+```
+
+![plot of chunk unnamed-chunk-22](figure/unnamed-chunk-22-1.png) 
+
+## Scatter Plot, Alternate Way of Calling
+
+
+```r
+plot(iris_dat$Sepal.Width, iris_dat$Sepal.Length)
+```
+
+![plot of chunk unnamed-chunk-23](figure/unnamed-chunk-23-1.png) 
+
+## Scatter Plot, With Some Options
+
+
+```r
+plot(iris_dat$Sepal.Width, iris_dat$Sepal.Length, 
+	pch=16, 
+	col=iris$Species, 
+	main='Sepal Length vs Sepal Width',
+	xlab='Length',
+	ylab='Width')
+```
+
+## Scatter Plot, With Some Options
+
+![plot of chunk unnamed-chunk-25](figure/unnamed-chunk-25-1.png) 
+
+## Dynamite Plots
+
+* A lot of papers use bar plots with error bars to show data with multiple measurements per treatment.
+* These have a lot of shortcomings: data being hidden, assumptions about the confidence intervals used, and wasted ink.
+* Unsurprisingly, R does not have an way to to these.
+* Instead, R does allow box plots, which are much better.
+* There is also a package for beeswarm plots.
+
 ## Box Plots
 
-- Don't use dynamite plots!!
+```r
+boxplot(Sepal.Width~Species, data=iris_dat)
+```
+
+![plot of chunk unnamed-chunk-26](figure/unnamed-chunk-26-1.png) 
+
 
 ## Beeswarm Plots
+
+```r
+library(beeswarm)
+beeswarm(Sepal.Width~Species, data=iris_dat)
+```
+
+![plot of chunk unnamed-chunk-27](figure/unnamed-chunk-27-1.png) 
+
+## Beeswarm Plots With More Options
+
+```r
+beeswarm(jitter(Sepal.Width)~Species, data=iris_dat,
+		 method='swarm',
+		 col=rainbow(3),
+		 pch=16)
+```
+
+## Beeswarm Plots With More Options
+![plot of chunk unnamed-chunk-29](figure/unnamed-chunk-29-1.png) 
+
+## Beeswarm and Boxplots Combined
+
+```r
+boxplot(Sepal.Width~Species, data=iris_dat)
+beeswarm(jitter(Sepal.Width)~Species, data=iris_dat,
+		 method='swarm',
+		 col=rainbow(3),
+		 pch=16,
+		 add=TRUE)
+```
+
+## Beeswarm and Boxplots Combined
+![plot of chunk unnamed-chunk-31](figure/unnamed-chunk-31-1.png) 
+
 
 ## Other Plotting Packages
 
 # Credits
 
-## Course Developers
+## This Workshop Brought to You By 
+
+
+### Course Developers:
 
 - Kieran O'Neill
 - Eva Yap
 - Alice Zhu (for next session)
 
+### Starting Material:
+
 Much material was reused from [Software Carpentry's Bootcamp workshops](https://github.com/swcarpentry/bc/tree/master/novice/r) and from [Andy Teucher's short R course](https://github.com/ateucher/rcourse_site), both under the terms of the [Creative Commons Attribution License](http://creativecommons.org/licenses/by/3.0/). 
+
+### Pizza and Logistics:
+
+- GraSPoDS (especially Eva Yap and Jessica Pilsworth)

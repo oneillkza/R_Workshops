@@ -5,7 +5,7 @@ clean:
 
 SRC := $(wildcard *.rmd)
 REPORTPDFS = $(SRC:.rmd=.pdf)
-PANDOC_OPTIONS = -t beamer --highlight-style=tango -V fontsize=10pt --latex-engine=xelatex --toc 
+PANDOC_OPTIONS = -t beamer --highlight-style=tango -V fontsize=8pt --toc 
 
 slides: $(REPORTPDFS)
 
