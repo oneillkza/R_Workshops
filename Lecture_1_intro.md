@@ -1,43 +1,210 @@
 ---
 pdf_document: null
 author: "Kieran O'Neill"
-fig_caption: no
-output: pdf_document
-html_document: null
-keep_md: yes
 highlight: tango
+output:
+  pdf_document:
+    keep_tex: yes
+keep_md: yes
+html_document: null
 title: "A (Very) Short Introduction to R for Wet Lab Scientists"
+fig_caption: no
 toc: yes
 toc_depth: 2
 ---
 	
-# Why use R?
+# What is R, and Why Should I Use It?
 	
-## Something something
+## The Basics
+
+R is a versatile, open source programming language that was specifically designed for data analysis. As such R is extremely useful both for statistics and data science. Inspired by the programming language S.  
+
+* Open source software under GPL.  
+* Superior (if not just comparable) to commercial alternatives. R has over 5,000 user contributed packages at this time. It's widely used both in academia and industry.  
+* Available on all platforms. 
+* Large and growing community of peers.
+* Bioconductor: largest (and arguably the best) free collection of software for biological data analysis anywhere.
+
+## Why Not Just Use Excel, FlowJo, GraphPad, etc?
+
+1. Reproducibility
+	* Its really important that you know what you did. 
+	* More journals/grants/etc. are also requiring this. 
+	* The best way to know what you did is to provide all the code.
+	* GUI software makes this difficult
+	* If you keep a lab notebook, why not do the same thing with your analysis?
+	
+2. Flexibility, capabilities and pretty pictures
+	* R can handle much larger data sets, much faster, and much more easily than Excel.
+	* Huge range of statistical tests, biological data types, etc.
+	* Plotting in R is far more sophisticated than any available GUI.
+
+
+## Proof of What I Mean By Pretty Pictures:
+
+![[Gerstung et al (2015) Nature Communications (CC-BY)](http://www.nature.com/ncomms/2015/150109/ncomms6901/full/ncomms6901.html#supplementary-information) ](images/ncomms6901-f1.jpg)
+
 
 
 # RStudio
 
 ## Set up a new project
 
+- Click 'file', then 'New project'
+- Click 'New directory'm then 'Empy Project', then pick a directory
+- With the project set up, click 'file', then 'new' (or ctrl+shift+n)
+- Click 'File', 'Save' (ctrl+s)
+- Save the file as something meaningful, like `lecture1_examples.R`
+
+Note: for Mac users, where I say 'ctrl', use your weird Mac control key instead.
+
 ## Quick overview of RStudio
 
-## Working between the script and console
+-Figure of interface
+
+## Working between the script and console {.fragile}
+
+*Type the following into the console, and press enter:
+
+
+```r
+print("Hello")
+```
+
+```
+## [1] "Hello"
+```
+
+* Now type it into the file window, and with the cursor on that line, press ctrl+enter
+* Messing around in the console is fun.
+* But it's better to keep your work in a file which you save often.
 
 
 # R Basics
 
-## Variables
+## Objects
+
+You can assign values to objects:
+
+
+```r
+some_number <- 5
+some_number + 3
+```
+
+```
+## [1] 8
+```
+
+```r
+some_other_number <- some_number ^ 3
+some_other_number
+```
+
+```
+## [1] 125
+```
+
+Take a look in your environment window in RStudio. You can also see what objects are defined using the `ls()` command:
+
+
+```r
+ls()
+```
+
+```
+## [1] "some_number"       "some_other_number"
+```
 
 ## Basic Data Types
 
--typeof
+You can find out the type of an object using `typeof()`:
 
--numeric vs character
 
-## More Complex Data Types
+```r
+typeof(some_number)
+```
 
-Data frames, vectors
+```
+## [1] "double"
+```
+
+
+```r
+some_text <- "5" 
+typeof(some_text)
+```
+
+```
+## [1] "character"
+```
+
+## Numeric vs Character
+
+
+```r
+some_number + 5 
+```
+
+```
+## [1] 10
+```
+
+
+```r
+some_text + 5
+```
+
+```
+## Error in some_text + 5: non-numeric argument to binary operator
+```
+
+
+```r
+as.numeric(some_text) + 5
+```
+
+```
+## [1] 10
+```
+
+## Vectors
+
+Vectors are one-dimensional objects. You can create them with the `c()` function:
+
+
+```r
+my_vector <- c(1,3,5,6,7,8)
+```
+
+You can apply operations to a whole vector.
+
+
+```r
+my_vector^3
+```
+
+```
+## [1]   1  27 125 216 343 512
+```
+
+You can join vectors with `c()`:
+
+
+```r
+c(my_vector, my_vector^3, my_vector^4)
+```
+
+```
+##  [1]    1    3    5    6    7    8    1   27  125  216  343  512    1   81
+## [15]  625 1296 2401 4096
+```
+
+## Data frames
+
+Data frames are special objects in R for storing mixed data. You can think of them as something like a sheet in Excel. We're going to load in one of R's default data sets, a series
+
+
 
 # Installing Packages
 
@@ -72,3 +239,13 @@ Data frames, vectors
 ## Beeswarm Plots
 
 ## Other Plotting Packages
+
+# Credits
+
+## Course Developers
+
+- Kieran O'Neill
+- Eva Yap
+- Alice Zhu (for next session)
+
+Much material was reused from [Software Carpentry's Bootcamp workshops](https://github.com/swcarpentry/bc/tree/master/novice/r) and from [Andy Teucher's short R course](https://github.com/ateucher/rcourse_site), both under the terms of the [Creative Commons Attribution License](http://creativecommons.org/licenses/by/3.0/). 
