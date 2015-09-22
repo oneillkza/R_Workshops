@@ -305,7 +305,6 @@ iris_dat <- read.xls('data/iris.xls')
 
 # Basic Statistical Tests
 
-<<<<<<< HEAD
 ## Student's t-test
 Using the Iris data set, let's find out if the difference in sepal length between two species is significant.
 
@@ -321,9 +320,6 @@ We can use `t.test()` to answer our question.
 ```{r, eval=FALSE}
 t.test(versicolor$Sepal.Length, virginica$Sepal.Length)
 ```
-=======
-## Student's T Test
->>>>>>> master
 
 ## Examining the Results
 
