@@ -48,7 +48,6 @@ R is a versatile, open source programming language that was specifically designe
 	* Huge range of statistical tests, biological data types, etc.
 	* Plotting in R is far more sophisticated than any available GUI.
 
-
 ## Proof of What I Mean By Pretty Pictures:
 
 ![[Gerstung et al (2015) Nature Communications (CC-BY)](http://www.nature.com/ncomms/2015/150109/ncomms6901/full/ncomms6901.html#supplementary-information) ](images/ncomms6901-f1.jpg)
@@ -59,13 +58,13 @@ R is a versatile, open source programming language that was specifically designe
 
 ## Set up a new project
 
-- Click 'file', then 'New project'
-- Click 'New directory'm then 'Empy Project', then pick a directory
-- With the project set up, click 'file', then 'new' (or ctrl+shift+n)
+- Click 'File', then 'New project'
+- Click 'New directory' then 'Empty Project', then pick a directory
+- With the project set up, click 'File', then 'New' (or ctrl+shift+n)
 - Click 'File', 'Save' (ctrl+s)
 - Save the file as something meaningful, like `lecture1_examples.R`
 
-Note: for Mac users, where I say 'ctrl', use your weird Mac control key instead.
+Note: for Mac users, where I say 'ctrl', use your weird Mac command key instead.
 
 ## Quick overview of RStudio
 
@@ -87,6 +86,7 @@ print("Hello")
 * Now type it into the file window, and with the cursor on that line, press ctrl+enter
 * Messing around in the console is fun.
 * But it's better to keep your work in a file which you save often.
+
 
 
 # R Commands and Objects
@@ -242,7 +242,7 @@ my_vector[2:4]
 
 ## Data Frames
 
-Data frames are special objects in R for storing mixed data. You can think of them as something like a sheet in Excel. We're going to load in one of R's default data sets, a series of esophogal cancer vs smoking data. We'll use the `head()` function to just view the first few rows.
+Data frames are special objects in R for storing mixed data. You can think of them as something like a sheet in Excel. We're going to load in one of R's default data sets, a series of esophageal cancer vs smoking data. We'll use the `head()` function to just view the first few rows.
 
 
 ```r
@@ -315,7 +315,7 @@ esoph[2,1]            # Single value using numbers
 ## Levels: 25-34 < 35-44 < 45-54 < 55-64 < 65-74 < 75+
 ```
 
-## Aother Useful Function: Summary()
+## Another Useful Function: Summary()
 
 
 ```r
@@ -331,6 +331,8 @@ summary(esoph[,3:5])
 ##                3rd Qu.: 4.000   3rd Qu.:14.00  
 ##                Max.   :17.000   Max.   :60.00
 ```
+
+
 
 # Installing Add-on Packages
 
@@ -352,7 +354,6 @@ When you start a new session, you can then load a package using `library`:
 library('beeswarm')
 ```
 
-
 ## Bioconductor
 
 * Bioconductor is a big part of what makes R awesome for biologists.
@@ -371,6 +372,7 @@ biocLite('flowCore') #Or whatever the package is called.
 ```
 
 
+
 # Loading in Files
 
 ## Edgar Anderson's Iris Data Set
@@ -379,7 +381,7 @@ Provides the measurements in centimeters of the variables sepal length and width
 
 ![*Iris versicolor*](images/iris_versicolor.jpg)
 
-## Edgar Anderson's Iris Data Set
+## Edgar Anderson's Iris Data Set (ctd)
 
 Let's load the Iris data set.
 
@@ -389,7 +391,7 @@ data(iris)
 iris_dat <- iris
 ```
 
-`str()` the object as a sanity check.
+`str()` and `colnames()` the object as a sanity check.
 
 
 ```r
@@ -398,6 +400,26 @@ str(iris_dat, max.level=0)
 
 ```
 ## 'data.frame':	150 obs. of  5 variables:
+```
+
+```r
+colnames(iris_dat)
+```
+
+```
+## [1] "Sepal.Length" "Sepal.Width"  "Petal.Length" "Petal.Width" 
+## [5] "Species"
+```
+
+What are the species of iris in this data set? 
+
+
+```r
+levels(iris_dat$Species)
+```
+
+```
+## [1] "setosa"     "versicolor" "virginica"
 ```
 
 ## Creating directories and downloading data
@@ -424,7 +446,7 @@ To load comma separated files in R:
 
 
 ```r
-iris_dat <- read.csv('data/iris.csv')
+iris_dat <- read.csv("data/iris.csv")
 ```
 
 ## Loading in from Excel
@@ -436,12 +458,14 @@ Alternatively, you could use the `gdata` package.
 
 ```r
 # install gdata and load as dependency
-install.packages('gdata')
+install.packages("gdata")
 library(gdata)
 
 # load data
-iris_dat <- read.xls('data/iris.xls')
+iris_dat <- read.xls("data/iris.xls")
 ```
+
+
 
 # Basic Statistical Tests
 
@@ -452,8 +476,8 @@ Using the Iris data set, let's find out if the difference in sepal length betwee
 
 
 ```r
-versicolor <- subset(iris_dat, iris_dat$Species == 'versicolor')
-virginica <- subset(iris_dat, iris_dat$Species == 'virginica')
+versicolor <- subset(iris_dat, iris_dat$Species == "versicolor")
+virginica <- subset(iris_dat, iris_dat$Species == "virginica")
 ```
 
 We can use `t.test()` to answer our question.
@@ -484,6 +508,20 @@ t.test(versicolor$Sepal.Length, virginica$Sepal.Length)
 ##     5.936     6.588
 ```
 
+You can also assign the above to an object and extract only the p-value.
+
+
+```r
+iris_test <- t.test(versicolor$Sepal.Length, virginica$Sepal.Length)
+paste("p-value:", iris_test$p.value)
+```
+
+```
+## [1] "p-value: 1.866144387377e-07"
+```
+
+
+
 # Basic Plots
 
 ## Scatter Plot
@@ -495,7 +533,7 @@ iris_dat <- iris
 plot(Sepal.Length~Sepal.Width, data=iris_dat)
 ```
 
-![plot of chunk unnamed-chunk-31](figure/unnamed-chunk-31-1.png) 
+![plot of chunk unnamed-chunk-33](figure/unnamed-chunk-33-1.png) 
 
 ## Scatter Plot, Alternate Way of Calling
 
@@ -504,7 +542,7 @@ plot(Sepal.Length~Sepal.Width, data=iris_dat)
 plot(iris_dat$Sepal.Width, iris_dat$Sepal.Length)
 ```
 
-![plot of chunk unnamed-chunk-32](figure/unnamed-chunk-32-1.png) 
+![plot of chunk unnamed-chunk-34](figure/unnamed-chunk-34-1.png) 
 
 ## Scatter Plot, With Some Options
 
@@ -520,7 +558,7 @@ plot(iris_dat$Sepal.Width, iris_dat$Sepal.Length,
 
 ## Scatter Plot, With Some Options
 
-![plot of chunk unnamed-chunk-34](figure/unnamed-chunk-34-1.png) 
+![plot of chunk unnamed-chunk-36](figure/unnamed-chunk-36-1.png) 
 
 ## Dynamite Plots
 
@@ -536,7 +574,7 @@ plot(iris_dat$Sepal.Width, iris_dat$Sepal.Length,
 boxplot(Sepal.Width~Species, data=iris_dat)
 ```
 
-![plot of chunk unnamed-chunk-35](figure/unnamed-chunk-35-1.png) 
+![plot of chunk unnamed-chunk-37](figure/unnamed-chunk-37-1.png) 
 
 
 ## Beeswarm Plots
@@ -546,7 +584,7 @@ library(beeswarm)
 beeswarm(Sepal.Width~Species, data=iris_dat)
 ```
 
-![plot of chunk unnamed-chunk-36](figure/unnamed-chunk-36-1.png) 
+![plot of chunk unnamed-chunk-38](figure/unnamed-chunk-38-1.png) 
 
 ## Beeswarm Plots With More Options
 
@@ -558,7 +596,7 @@ beeswarm(jitter(Sepal.Width)~Species, data=iris_dat,
 ```
 
 ## Beeswarm Plots With More Options
-![plot of chunk unnamed-chunk-38](figure/unnamed-chunk-38-1.png) 
+![plot of chunk unnamed-chunk-40](figure/unnamed-chunk-40-1.png) 
 
 ## Beeswarm and Boxplots Combined
 
@@ -572,10 +610,32 @@ beeswarm(jitter(Sepal.Width)~Species, data=iris_dat,
 ```
 
 ## Beeswarm and Boxplots Combined
-![plot of chunk unnamed-chunk-40](figure/unnamed-chunk-40-1.png) 
+![plot of chunk unnamed-chunk-42](figure/unnamed-chunk-42-1.png) 
 
 
-## Other Plotting Packages
+## Other Plotting Packages - `ggplot2`
+
+
+```r
+# install ggplot2 and load dependency
+install.packages("ggplot2")
+library(ggplot2)
+
+# plot
+ggplot(iris_dat, aes(Sepal.Length, Sepal.Width)) +
+  geom_point() + 
+  theme_bw() +
+  xlab("Sepal length (cm)") + 
+  ylab("Sepal width (cm)") + 
+  ggtitle("Sepal width vs. sepal length in Iris data set") +
+  facet_grid(Species~.)
+```
+
+## Other Plotting Packages - `ggplot2`
+
+
+
+![plot of chunk unnamed-chunk-45](figure/unnamed-chunk-45-1.png) 
 
 # Credits
 
@@ -598,4 +658,4 @@ Much material was reused from [Software Carpentry's Bootcamp workshops](https://
 
 ### License:
 
-You are free to download, copy and modify this work in accordance with the Creative Commons Attribution License](http://creativecommons.org/licenses/by/3.0/).
+You are free to download, copy and modify this work in accordance with the [Creative Commons Attribution License](http://creativecommons.org/licenses/by/3.0/).
