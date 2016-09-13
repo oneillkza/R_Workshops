@@ -17,30 +17,28 @@ toc_depth: 2
 
 ## Course Logistics
 
-* This is a very brief introduction to a very large topic.
-* There will be at least one follow-up workshop going into more depth.
-* Depending on demand (and our time), we may create more.
+* This is lecture 1 of a series, probably to be given about monthly 
 * You can find all of the slides at [https://github.com/oneillkza/R_Workshops](https://github.com/oneillkza/R_Workshops)
 * In the last slide are links to materials from some excellent and much longer courses.
 * Please ask questions as we go!
 	
 ## What is R?
 
-R is a versatile, open source programming language that was specifically designed for data analysis. As such R is extremely useful both for statistics and data science. Inspired by the programming language S.  
+R is a versatile, open source statistical programming language. 
 
-* Open source software under GPL.  
-* Superior (if not just comparable) to commercial alternatives. R has over 5,000 user contributed packages at this time. It's widely used both in academia and industry.  
-* Available on all platforms. 
-* Large and growing community of peers.
+* It's free! (and open source)
+* Huge amount of free software -- over 9,000 packages 
+* Available on all platforms (Windows, Mac, Linux) 
+* Widely used both in academia and industry.  
+* RStudio provides a (somewhat) user-friendly analysis environment
 * Bioconductor: largest (and arguably the best) free collection of software for biological data analysis anywhere.
 
 ## Why Not Just Use Excel, FlowJo, GraphPad, etc?
 
 1. Reproducibility
-	* Its really important that you know what you did. 
+	* GUI packages are really bad at saving history. 
+	* With R (and R markdown), you can prepare a report with all your code, figures, etc
 	* More journals/grants/etc. are also requiring this. 
-	* The best way to know what you did is to provide all the code.
-	* GUI software makes this difficult
 	* If you keep a lab notebook, why not do the same thing with your analysis?
 	
 2. Flexibility, capabilities and pretty pictures
@@ -542,7 +540,7 @@ paste("p-value:", iris_test$p.value)
 plot(Sepal.Length~Sepal.Width, data=iris_dat)
 ```
 
-![plot of chunk unnamed-chunk-35](figure/unnamed-chunk-35-1.png) 
+![plot of chunk unnamed-chunk-35](figure/unnamed-chunk-35-1.png)
 
 ## Scatter Plot, Alternate Way of Calling
 
@@ -551,7 +549,7 @@ plot(Sepal.Length~Sepal.Width, data=iris_dat)
 plot(iris_dat$Sepal.Width, iris_dat$Sepal.Length)
 ```
 
-![plot of chunk unnamed-chunk-36](figure/unnamed-chunk-36-1.png) 
+![plot of chunk unnamed-chunk-36](figure/unnamed-chunk-36-1.png)
 
 ## Scatter Plot, With Some Options
 
@@ -567,7 +565,7 @@ plot(iris_dat$Sepal.Width, iris_dat$Sepal.Length,
 
 ## Scatter Plot, With Some Options
 
-![plot of chunk unnamed-chunk-38](figure/unnamed-chunk-38-1.png) 
+![plot of chunk unnamed-chunk-38](figure/unnamed-chunk-38-1.png)
 
 ## Dynamite Plots
 
@@ -583,7 +581,7 @@ plot(iris_dat$Sepal.Width, iris_dat$Sepal.Length,
 boxplot(Sepal.Width~Species, data=iris_dat)
 ```
 
-![plot of chunk unnamed-chunk-39](figure/unnamed-chunk-39-1.png) 
+![plot of chunk unnamed-chunk-39](figure/unnamed-chunk-39-1.png)
 
 
 ## Beeswarm Plots
@@ -593,7 +591,7 @@ library(beeswarm)
 beeswarm(Sepal.Width~Species, data=iris_dat)
 ```
 
-![plot of chunk unnamed-chunk-40](figure/unnamed-chunk-40-1.png) 
+![plot of chunk unnamed-chunk-40](figure/unnamed-chunk-40-1.png)
 
 ## Beeswarm Plots With More Options
 
@@ -605,7 +603,7 @@ beeswarm(jitter(Sepal.Width)~Species, data=iris_dat,
 ```
 
 ## Beeswarm Plots With More Options
-![plot of chunk unnamed-chunk-42](figure/unnamed-chunk-42-1.png) 
+![plot of chunk unnamed-chunk-42](figure/unnamed-chunk-42-1.png)
 
 ## Beeswarm and Boxplots Combined
 
@@ -619,7 +617,7 @@ beeswarm(jitter(Sepal.Width)~Species, data=iris_dat,
 ```
 
 ## Beeswarm and Boxplots Combined
-![plot of chunk unnamed-chunk-44](figure/unnamed-chunk-44-1.png) 
+![plot of chunk unnamed-chunk-44](figure/unnamed-chunk-44-1.png)
 
 
 ## Other Plotting Packages - `ggplot2`
@@ -643,8 +641,11 @@ ggplot(iris_dat, aes(Sepal.Length, Sepal.Width)) +
 ## Other Plotting Packages - `ggplot2`
 
 
+```
+## Warning: package 'ggplot2' was built under R version 3.2.4
+```
 
-![plot of chunk unnamed-chunk-47](figure/unnamed-chunk-47-1.png) 
+![plot of chunk unnamed-chunk-47](figure/unnamed-chunk-47-1.png)
 
 # Credits
 

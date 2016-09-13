@@ -17,30 +17,28 @@ toc_depth: 2
 
 ## Course Logistics
 
-* This is a very brief introduction to a very large topic.
-* There will be at least one follow-up workshop going into more depth.
-* Depending on demand (and our time), we may create more.
+* This is lecture 1 of a series, probably to be given about monthly 
 * You can find all of the slides at [https://github.com/oneillkza/R_Workshops](https://github.com/oneillkza/R_Workshops)
 * In the last slide are links to materials from some excellent and much longer courses.
 * Please ask questions as we go!
 	
 ## What is R?
 
-R is a versatile, open source programming language that was specifically designed for data analysis. As such R is extremely useful both for statistics and data science. Inspired by the programming language S.  
+R is a versatile, open source statistical programming language. 
 
-* Open source software under GPL.  
-* Superior (if not just comparable) to commercial alternatives. R has over 5,000 user contributed packages at this time. It's widely used both in academia and industry.  
-* Available on all platforms. 
-* Large and growing community of peers.
+* It's free! (and open source)
+* Huge amount of free software -- over 9,000 packages 
+* Available on all platforms (Windows, Mac, Linux) 
+* Widely used both in academia and industry.  
+* RStudio provides a (somewhat) user-friendly analysis environment
 * Bioconductor: largest (and arguably the best) free collection of software for biological data analysis anywhere.
 
 ## Why Not Just Use Excel, FlowJo, GraphPad, etc?
 
 1. Reproducibility
-	* Its really important that you know what you did. 
+	* GUI packages are really bad at saving history. 
+	* With R (and R markdown), you can prepare a report with all your code, figures, etc
 	* More journals/grants/etc. are also requiring this. 
-	* The best way to know what you did is to provide all the code.
-	* GUI software makes this difficult
 	* If you keep a lab notebook, why not do the same thing with your analysis?
 	
 2. Flexibility, capabilities and pretty pictures
