@@ -18,9 +18,11 @@ toc_depth: 2
 ## Course Logistics
 
 * This is lecture 1 of a series, probably to be given about monthly 
-* You can find all of the slides at [https://github.com/oneillkza/R_Workshops](https://github.com/oneillkza/R_Workshops)
+* You can find the slides and notes [https://github.com/oneillkza/R_Workshops](https://github.com/oneillkza/R_Workshops)
+* I will start with a few slides, then jump into RStudio and step through the remaining material live
+* You can follow along on your laptop if you like.
 * In the last slide are links to materials from some excellent and much longer courses.
-* Please ask questions as we go!
+* I've allowed for a little time, so please ask questions as we go!
 	
 ## What is R?
 
@@ -640,31 +642,21 @@ ggplot(iris_dat, aes(Sepal.Length, Sepal.Width)) +
 
 ## Other Plotting Packages - `ggplot2`
 
-
-```
-## Warning: package 'ggplot2' was built under R version 3.2.4
-```
-
 ![plot of chunk unnamed-chunk-47](figure/unnamed-chunk-47-1.png)
 
-# Credits
 
-## This Workshop Brought to You By...
+## `ggplot2` can do "faceted" plots
 
 
-### Course Developers:
+![plot of chunk unnamed-chunk-48](figure/unnamed-chunk-48-1.png)
 
-- Kieran O'Neill
-- Eva Yap
-- Alice Zhu (for next session)
+# Links and Credits
 
-### Starting Material:
+## Where to go from here?
 
-Much material was reused from [Software Carpentry's Bootcamp workshops](https://github.com/swcarpentry/bc/tree/master/novice/r) and from [Andy Teucher's short R course](https://github.com/ateucher/rcourse_site), both under the terms of the [Creative Commons Attribution License](http://creativecommons.org/licenses/by/3.0/). 
+Much material was reused from [Software Carpentry's Bootcamp workshops](https://github.com/swcarpentry/bc/tree/master/novice/r) and from [Andy Teucher's short R course](https://github.com/ateucher/rcourse_site), both under the terms of the [Creative Commons Attribution License](http://creativecommons.org/licenses/by/3.0/). Both of these are good sources for free material for learning R.
 
-### Pizza and Logistics:
-
-- GraSPoDS (especially Eva Yap and Jessica Pilsworth)
+If you're at UBC, STAT540 is an excellent course in using R to analyse biological data. If you're not, [all the materials are also on GitHub](https://stat540-ubc.github.io/). 
 
 ### License:
 
