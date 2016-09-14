@@ -17,7 +17,6 @@ toc_depth: 2
 
 ## Course Logistics
 
-* This is lecture 1 of a series, probably to be given about monthly 
 * You can find the slides and notes [https://github.com/oneillkza/R_Workshops](https://github.com/oneillkza/R_Workshops)
 * I will start with a few slides, then jump into RStudio and step through the remaining material live
 * You can follow along on your laptop if you like.
